@@ -1,5 +1,6 @@
 from app import app
-from flask import request
+from flask import request, Response
+import json
 
 members = 0
 projects = 0
@@ -11,9 +12,10 @@ def save_number_of_members():
     global members
     if request.args.get('count') != "" and request.args.get('count') is not None:
         members = request.args.get('count')
-        return {"message": f"number of members saved: {members}"}
+        return Response(status=200)
     else:
-        return {"message": "fill in the parameter"}
+        message = json.dumps({"message": "fill in the parameter"})
+        return Response(message, status=400, mimetype='application/json')
 
 
 @app.post('/projects')
@@ -21,9 +23,10 @@ def save_number_of_projects():
     global projects
     if request.args.get('count') != "" and request.args.get('count') is not None:
         projects = request.args.get('count')
-        return {"message": f"number of members saved: {projects}"}
+        return Response(status=200)
     else:
-        return {"message": "fill in the parameter"}
+        message = json.dumps({"message": "fill in the parameter"})
+        return Response(message, status=400, mimetype='application/json')
 
 
 @app.post('/events')
@@ -31,9 +34,10 @@ def save_number_of_events():
     global events
     if request.args.get('count') != "" and request.args.get('count') is not None:
         events = request.args.get('count')
-        return {"message": f"number of members saved: {events}"}
+        return Response(status=200)
     else:
-        return {"message": "fill in the parameter"}
+        message = json.dumps({"message": "fill in the parameter"})
+        return Response(message, status=400, mimetype='application/json')
 
 
 @app.get('/members')
